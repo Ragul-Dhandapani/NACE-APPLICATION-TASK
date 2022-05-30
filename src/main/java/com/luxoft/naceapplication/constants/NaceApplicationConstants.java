@@ -23,4 +23,7 @@ public class NaceApplicationConstants {
     public static final String FILE_CANNOT_BE_BLANK_ERR_MSG = "Value of request header named 'file' cannot be blank";
     public static final String INVALID_CSV_EXTENSIONS_ERR_MSG = "File types other than CSV extensions are not allowed";
     public static final String NACE_APPLICATION_IS_UP_RUNNING_MSG = "Nace Application is UP & Running";
+
+    private NaceApplicationConstants() {
+    }
 }

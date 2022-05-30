@@ -39,7 +39,7 @@ public class NaceExceptionResolver extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({Exception.class , IOException.class , ArithmeticException.class , FileNotFoundException.class ,
             NumberFormatException.class , IllegalStateException.class , ConcurrentModificationException.class ,
-            ExecutionException.class , JpaSystemException.class})
+            ExecutionException.class , JpaSystemException.class,ExecutionException.class,InterruptedException.class})
     public final ResponseEntity<NaceErrorResponseDto> genericException(Exception exception) {
         final String message = (exception.getMessage() != null && !exception.getMessage().isEmpty()) ? exception.getMessage() : ISR_MSG;
         NaceErrorResponseDto errorResponseDto = new NaceErrorResponseDto(FAILED , message , LocalDateTime.now());

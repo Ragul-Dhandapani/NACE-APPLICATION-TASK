@@ -28,7 +28,7 @@ public class CacheConfiguration {
                     .eternal(false).maxEntriesLocalHeap(0)
                     .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LRU)
                     .name(NaceApplicationConstants.NACE_ORDER_DETAILS_CACHE)
-                    .timeToLiveSeconds(Long.valueOf(86400));
+                    .timeToLiveSeconds(86400L);
 
             Cache cache = new Cache(ehCacheConfig);
             cacheManager().addCache(cache);
