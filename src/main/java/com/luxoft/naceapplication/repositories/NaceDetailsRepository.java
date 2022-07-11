@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface NaceDetailsRepository extends JpaRepository<NaceDetailsEntity, Long> {
 
-    public List<NaceDetailsEntity> findByOrder(Long order);
+    List<NaceDetailsEntity> findByOrder(Long order);
 
-    public void deleteByOrder(Long order);
+    void deleteByOrder(Long order);
 }

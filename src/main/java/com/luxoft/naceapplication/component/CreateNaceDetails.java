@@ -13,8 +13,8 @@ public class CreateNaceDetails implements Callable<List<NaceDetailsEntity>> {
 
     private static final Logger LOG = LoggerFactory.getLogger(CreateNaceDetails.class);
 
-    private NaceDetailsRepository naceDetailsRepository;
-    private List<NaceDetailsEntity> naceDetails;
+    private final NaceDetailsRepository naceDetailsRepository;
+    private final List<NaceDetailsEntity> naceDetails;
 
     @Autowired
     public CreateNaceDetails(List<NaceDetailsEntity> naceDetails , NaceDetailsRepository naceDetailsRepository) {

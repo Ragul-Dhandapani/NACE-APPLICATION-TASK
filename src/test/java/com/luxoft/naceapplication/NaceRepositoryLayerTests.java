@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @TestInstance(Lifecycle.PER_CLASS)
-public class NaceRepositoryLayerTests {
+class NaceRepositoryLayerTests {
 
-    public static final long ORDER = 11111L;
-    public static final long ORDER_2 = 2222L;
-    public static final String DESCRIPTION_1 = "description_1";
+    static final long ORDER = 11111L;
+    static final long ORDER_2 = 2222L;
+    static final String DESCRIPTION_1 = "description_1";
 
     @Autowired
     private NaceDetailsRepository naceDetailsRepository;
@@ -28,7 +28,7 @@ public class NaceRepositoryLayerTests {
     private List<NaceDetailsEntity> naceRecordInformation;
 
     @BeforeAll
-    public void setUp() {
+    void setUp() {
         naceRecordInformation = new ArrayList<>();
         naceRecordInformation.add(NaceDetailsEntity.builder().code("11").description(DESCRIPTION_1).entityId(1L)
                 .itemAlsoIncludes("itemAlsoIncludes_1").itemIncludes("itemIncludes_1").itemExcludes("itemExcludes_1").rulings("rulings_1").referencesIsic("1")
@@ -42,7 +42,7 @@ public class NaceRepositoryLayerTests {
      * Successful Scenario :  Test Repository to add all the above orders
      */
     @Test
-    public void testSaveAllNaceDetails() {
+    void testSaveAllNaceDetails() {
 
         naceDetailsRepository.saveAll(naceRecordInformation);
         List<NaceDetailsEntity> result = naceDetailsRepository.findByOrder(ORDER);
@@ -53,7 +53,7 @@ public class NaceRepositoryLayerTests {
      * Successful Scenario :  Test Repository to delete the second order and check the size of it.
      */
     @Test
-    public void testDeleteByOrder() {
+    void testDeleteByOrder() {
 
         naceDetailsRepository.saveAll(naceRecordInformation);
 

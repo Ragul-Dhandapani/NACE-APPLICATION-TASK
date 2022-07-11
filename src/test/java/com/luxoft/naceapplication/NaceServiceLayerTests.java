@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.validation.ConstraintViolationException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +23,23 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class NaceServiceLayerTests {
+class NaceServiceLayerTests {
 
-    public static final String NACE_DATA_CSV = "NACE_DATA.csv";
-    @Autowired
-    NaceService naceService;
+    static final String NACE_DATA_CSV = "NACE_DATA.csv";
 
     @Autowired
-    NaceDetailsRepository naceDetailsRepository;
+    private NaceService naceService;
 
     @Autowired
-    NaceAddDetailsExecutor naceAddDetailsExecutor;
+    private NaceDetailsRepository naceDetailsRepository;
+
+    @Autowired
+    private NaceAddDetailsExecutor naceAddDetailsExecutor;
 
     private List<NaceDetailsEntity> persistedNaceDetails;
 
     @BeforeAll
-    public void setUp() {
+    void setUp() {
         naceService = new NaceService();
         naceDetailsRepository = mock(NaceDetailsRepository.class);
         naceAddDetailsExecutor = mock(NaceAddDetailsExecutor.class);
@@ -46,22 +48,21 @@ public class NaceServiceLayerTests {
     }
 
     @Test
-    public void testPutNaceDetailsShouldbeSuccessful()
+    void testPutNaceDetailsShouldBeSuccessful()
             throws NumberFormatException, ConstraintViolationException, IOException, InterruptedException {
 
         List<NaceDetailsEntity> addedNaceRecords = constructNaceDetailsEntityList();
-        when(naceService.createNaceDetails(NACE_DATA_CSV)).thenReturn(addedNaceRecords);
+        when(naceService.createNaceDetailsFromCSV(new FileReader(NACE_DATA_CSV))).thenReturn(addedNaceRecords);
         when(naceAddDetailsExecutor.execute(addedNaceRecords , naceDetailsRepository)).thenReturn(addedNaceRecords);
 
-        persistedNaceDetails = naceService.createNaceDetails(NACE_DATA_CSV);
+        persistedNaceDetails = naceService.createNaceDetailsFromCSV(new FileReader(NACE_DATA_CSV));
         assertEquals(2 , persistedNaceDetails.size());
     }
 
     @Test
-    public void testPutNaceDetailShouldFailWhenFilePathIsNull()
-            throws NumberFormatException, ConstraintViolationException, IOException {
+    void testPutNaceDetailShouldFailWhenFilePathIsNull() {
 
-        assertThrows(ConstraintViolationException.class , () -> naceService.createNaceDetails(null));
+        assertThrows(IllegalArgumentException.class , () -> naceService.createNaceDetailsFromCSV(null));
     }
 
 

@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -41,7 +44,7 @@ public class NaceAddDetailsExecutor {
 
         List<Callable<List<NaceDetailsEntity>>> callables = new ArrayList<>();
         partitionedNaceDetails.forEach(sublist ->
-            callables.add(new CreateNaceDetails(sublist , naceDetailsRepository))
+                callables.add(new CreateNaceDetails(sublist , naceDetailsRepository))
         );
 
         Stream<List<NaceDetailsEntity>> map = executor.invokeAll(callables).stream().map(future -> {
