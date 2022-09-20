@@ -35,8 +35,8 @@ import java.util.Objects;
 
 import static com.luxoft.naceapplication.constants.NaceApplicationConstants.*;
 
-@RestController
 @RequestMapping(BASE_API_URL)
+@RestController
 @Validated
 @Api(value = "Nace Application Data Retrieval")
 public class NaceApplicationController {
@@ -105,6 +105,7 @@ public class NaceApplicationController {
                     + ORDER_VALUE_CANNOT_BE_ZERO_ERR_MSG)
     })
     @GetMapping(path = "order/{order}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @PostMapping(path = "importNaceDetails", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RetrieveNaceInformation>> getNaceInformation(@PathVariable(name = "order", required = true)
                                                                             @NotEmpty(message = ORDER_EMPTY_OR_BLANK_ERR_MSG)
                                                                             @Digits(message = NON_FRACTION_ERROR_MSG, fraction = 0, integer = 10)

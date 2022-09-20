@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder().title("NACE APPLICATION MICROSERVICES")
-                .description("Available features:\n \n 1. Import CSV file which contains the NACE details into the application \n 2. Retrieve NACE records for a given order")
+                .description("Available features:\n \n 1. Import CSV file which contains the NACE details into the application \n 2. Retrieve NACE records for a given order Id")
                 .contact(new Contact("Ragul Dhandapani" , "https://github.com/ragul-dhandapani" , "abcde@gmail.com"))
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
